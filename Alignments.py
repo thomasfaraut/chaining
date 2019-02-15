@@ -238,6 +238,9 @@ class Alignment(object):
     def sindex(self, index):
         self._sindex = index
 
+    def num_align(self):
+        return 1
+
 
 def qdistance(a, b):
     """
@@ -380,12 +383,22 @@ class Chain(Alignment):
     def len(self):
         return len(self._hsps)
 
+    def num_align(self):
+        num = 0
+        for hsp in self._hsps:
+            num += hsp.num_align()
+        return num
+
     def elements(self):
         return self._hsps
 
     def display(self):
         for a in self._hsps:
             print(a)
+
+    def chain2string(self, format="bedpe"):
+        chain_as_align = self.hsp2string(format)
+        return "%s\t%d" % (chain_as_align, self.num_align())
 
 
 class AlignSet(object):
@@ -474,7 +487,7 @@ class AlignSet(object):
     def hsp2string(self, format="bedpe", filter=False, file=sys.stdout):
         for a in sorted(self._hsps, key=lambda x: x.qindex):
             if not filter or a.selected:
-                print(a.hsp2string(format), file=file)
+                print(a.chain2string(format), file=file)
 
     def qdisplay(self, format="bedpe", filter=False, file=sys.stdout):
         self.hsp2string(format, filter, file)
