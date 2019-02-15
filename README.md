@@ -2,7 +2,7 @@
 # chaining
 A lis-like chaining algorithm.
 
-## principle
+## algorithm outline
 From previously computed alignments construct chains using a dropoff longest increasing sub-sequence (LIS) algorithm. The score of a chain is an extension of alignment score where reward is given for alignement and penality for a gap (gap score is adapted from axtchain algorithm).
 
 ```
