@@ -2,6 +2,9 @@
 # chaining
 A lis-like chaining algorithm.
 
+## principle
+From previously computed alignments construct chains using a dropoff longest increasing sub-sequence (LIS) algorithm. The score of a chain is an extension of alignment score where reward is given for alignement and penality for a gap (gap score is adapted from axtchain algorithm).
+
 ```
 Usage:
 chaining.py -i INPUT -f FASTA [-ho FILE] [--scaffold=<sn>] [--stranded] [--min_scaffold_size=<sn>] [--min_align_length=<an>] [--format=<format>] [--log=<logfile>] [--debug] [--quiet | --verbose] [--head=<hn>]
